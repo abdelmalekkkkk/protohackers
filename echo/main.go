@@ -2,7 +2,10 @@ package main
 
 import (
 	"flag"
+	"fmt"
+	"io/ioutil"
 	"log"
+	"net"
 
 	"github.com/abdelmalekkkkk/protohackers/echo/server"
 )
@@ -16,6 +19,16 @@ func main() {
 	server, err := server.NewServer(server.ServerConfig{
 		Host: *host,
 		Port: *port,
+		RequestHandler: func(conn net.Conn) {
+			data, err := ioutil.ReadAll(conn)
+
+			if err != nil {
+				fmt.Println(fmt.Errorf("could not read data: %w", err))
+			}
+
+			conn.Write(data)
+			conn.Close()
+		},
 	})
 	if err != nil {
 		log.Fatal(err)

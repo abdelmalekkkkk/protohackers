@@ -2,13 +2,13 @@ package server
 
 import (
 	"fmt"
-	"io/ioutil"
 	"net"
 )
 
 type ServerConfig struct {
-	Port string
-	Host string
+	Port           string
+	Host           string
+	RequestHandler func(net.Conn)
 }
 
 type server struct {
@@ -46,17 +46,6 @@ func (server *server) Run() error {
 			fmt.Println(fmt.Errorf("could not accept connection: %w", err))
 		}
 
-		server.HandleConnection(conn)
+		server.Config.RequestHandler(conn)
 	}
-}
-
-func (server *server) HandleConnection(conn net.Conn) {
-	data, err := ioutil.ReadAll(conn)
-
-	if err != nil {
-		fmt.Println(fmt.Errorf("could not read data: %w", err))
-	}
-
-	conn.Write(data)
-	conn.Close()
 }
