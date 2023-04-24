@@ -7,7 +7,7 @@ import (
 	"log"
 	"net"
 
-	"github.com/abdelmalekkkkk/protohackers/echo/server"
+	"github.com/abdelmalekkkkk/protohackers/server"
 )
 
 func main() {

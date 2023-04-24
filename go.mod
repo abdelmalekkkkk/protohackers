@@ -1,4 +1,4 @@
-module github.com/abdelmalekkkkk/protohackers/echo
+module github.com/abdelmalekkkkk/protohackers
 
 go 1.20
 

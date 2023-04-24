@@ -46,6 +46,6 @@ func (server *server) Run() error {
 			fmt.Println(fmt.Errorf("could not accept connection: %w", err))
 		}
 
-		server.Config.RequestHandler(conn)
+		go server.Config.RequestHandler(conn)
 	}
 }
