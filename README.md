@@ -1,1 +1,1 @@
-# Solutions for Protohackers challenges
+# Solutions for Protohackers challenges in Golang
